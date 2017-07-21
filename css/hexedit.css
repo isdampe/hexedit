@@ -60,15 +60,19 @@ body {
   position: absolute;
   z-index: 99; }
 
+.hex-cursor-animated {
+  animation: 1s flashing infinite;
+  -webkit-animation: 1s blink step-end infinite;
+  -moz-animation: 1s blink step-end infinite;
+  -ms-animation: 1s blink step-end infinite;
+  -o-animation: 1s blink step-end infinite;
+  animation: 1s blink step-end infinite; }
+
 .hex-search-highlight {
   background: rgba(255, 82, 82, 0.2);
   border: 2px solid #ff5252;
   z-index: 1;
-  width: 212px;
-  height: 28px;
   position: absolute;
-  left: 166px;
-  top: 80px;
   z-index: 2; }
 
 @keyframes "blink" {

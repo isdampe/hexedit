@@ -12,7 +12,7 @@
 			<input type="file" id="hex-file-open-input" />
 		</nav>
 		<div class="hex-editor" id="hex-editor-container">
-			 <div class="hex-cursor" id="hex-cursor"></div>
+			 <div class="hex-cursor hex-cursor-animated" id="hex-cursor"></div>
 			<div class="hex-search-highlight" id="hex-search-highlight"></div>
 			<div class="spacer" id="hex-spacer"></div>
 			<div id="hex-editor">
@@ -30,6 +30,13 @@
 		</div>
 	</div>
 
+	<script src="src/vendor/debounce.js"></script>
 	<script src="src/hexedit.js"></script>
+	<script>
+		var he = new hexEditor();
+		he.preRender();
+		he.render();
+		he.setCursorPosition(0);
+	</script>
 </body>
 </html>
