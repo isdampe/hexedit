@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css?family=Fira+Mono");
+* {
+  font-family: 'Fira Mono', monospace;
+  box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-size: 14px;
+  background: #1a1a1a;
+  color: #888; }
+
+.hex-menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 30px;
+  background: #111; }
+
+.hex-data-type {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 170px;
+  background: #1d1d1d;
+  padding: 20px; }
+  .hex-data-type table {
+    width: 100%; }
+    .hex-data-type table th {
+      width: 140px;
+      color: #bbb; }
+    .hex-data-type table th, .hex-data-type table td {
+      text-align: left;
+      vertical-align: top;
+      padding: 5px;
+      font-size: 14px; }
+
+.hex-editor {
+  position: fixed;
+  top: 30px;
+  width: 100%;
+  height: calc(100% - 200px);
+  background: #232323;
+  color: #989898;
+  overflow-y: scroll; }
+  .hex-editor .line {
+    word-spacing: 5px; }
+    .hex-editor .line .location, .hex-editor .line .data {
+      display: inline-block;
+      padding: 5px; }
+    .hex-editor .line .location {
+      background: #202020;
+      padding: 5px 20px; }
+
+.hex-cursor {
+  width: 2px;
+  height: 19px;
+  background: #2196f3;
+  position: absolute;
+  z-index: 99; }
+
+.hex-search-highlight {
+  background: rgba(255, 82, 82, 0.2);
+  border: 2px solid #ff5252;
+  z-index: 1;
+  width: 212px;
+  height: 28px;
+  position: absolute;
+  left: 166px;
+  top: 80px;
+  z-index: 2; }
+
+@keyframes "blink" {
+  from, to {
+    opacity: 0; }
+  50% {
+    opacity: 1; } }
+@-moz-keyframes blink {
+  from, to {
+    opacity: 0; }
+  50% {
+    opacity: 1; } }
+@-webkit-keyframes "blink" {
+  from, to {
+    opacity: 0; }
+  50% {
+    opacity: 1; } }
+@-ms-keyframes "blink" {
+  from, to {
+    opacity: 0; }
+  50% {
+    opacity: 1; } }
+@-o-keyframes "blink" {
+  from, to {
+    opacity: 0; }
+  50% {
+    opacity: 1; } }
+
+/*# sourceMappingURL=hexedit.css.map */

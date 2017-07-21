@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Hexedit</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/hexedit.css">
+</head>
+<body>
+
+	<div id="hex-edit">
+		<nav class="hex-menu">
+			<input type="file" id="hex-file-open-input" />
+		</nav>
+		<div class="hex-editor" id="hex-editor-container">
+			 <div class="hex-cursor" id="hex-cursor"></div>
+			<div class="hex-search-highlight" id="hex-search-highlight"></div>
+			<div class="spacer" id="hex-spacer"></div>
+			<div id="hex-editor">
+			</div>
+		</div>
+		<div class="hex-data-type">
+			<table>
+				<tbody>
+					<tr><th>byte</th><td>69</td></tr>
+					<tr><th>short</th><td>696e</td></tr>
+					<tr><th>int</th><td>696eff</td></tr>
+					<tr><th>long</th><td>696eff2c</td></tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<script src="src/hexedit.js"></script>
+</body>
+</html>
