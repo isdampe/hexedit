@@ -35,3 +35,16 @@ hexEditor.prototype.openLocalFile = function(e, file) {
 	reader.readAsArrayBuffer(file);
 
 };
+
+hexEditor.prototype.bitOverride = function(charPosition, data) {
+
+	if ( charPosition < 0 )
+		return;
+	if ( charPosition >= this.stringBuffer.length )
+		return;
+
+	this.stringBuffer = this.stringBuffer.substr(0, charPosition) +
+		data +
+		this.stringBuffer.substr(charPosition + data.length);
+
+};

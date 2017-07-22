@@ -36,8 +36,11 @@
 	<script src="src/cursor.js"></script>
 	<script src="src/io.js"></script>
 	<script src="src/input.js"></script>
+	<script src="src/debug.js"></script>
 	<script>
-		var he = new hexEditor();
+		var he = new hexEditor({
+			debug: true
+		});
 		he.preRender();
 		he.render();
 		he.setCursorPosition(0);

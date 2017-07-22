@@ -1,9 +1,17 @@
-function hexEditor() {
+function hexEditor(config) {
 
 	var he = this;
 	this.rawBuffer;
 	this.stringBuffer = "00";
 	this.cursorPosition = 0;
+
+	this.config = {
+		debug: false
+	};
+
+	if ( typeof config == 'undefined' ) 
+		config = {};
+
 	this.styles = {
 		lineWidth: 0,
 		lineHeight: 0,
@@ -23,14 +31,22 @@ function hexEditor() {
 
 	this.keyBindings = {
 		inputKeys: '0123456789ABCDEF'.split(""),
-		navKeys: [37, 38, 39, 40]
+		navKeys: [37, 38, 39, 40],
+		deleteKeys: ["backspace"]
 	};
 
-	this.init();
+	this.init(config);
 
 }
 
-hexEditor.prototype.init = function() {
+hexEditor.prototype.init = function(config) {
+
+	//Override the default config values.
+	for ( key in config ) {
+		if ( config.hasOwnProperty(key) ) {
+			this.config[key] = config[key];
+		}
+	}
 
 	this.els = {
 		editor: document.getElementById('hex-editor'),

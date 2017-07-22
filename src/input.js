@@ -1,17 +1,25 @@
+hexEditor.prototype.processDeleteKey = function(e) {
+
+	e.preventDefault();
+
+	if ( this.cursorPosition < 1 )
+		return;
+
+	this.bitOverride(this.cursorPosition -1, "0");
+	this.setCursorPosition(this.cursorPosition - 1);
+	this.render();
+};
+
 hexEditor.prototype.processInputKey = function(e) {
 
 	if ( this.cursorPosition >= this.stringBuffer.length )
 		return;
 
-	this.stringBuffer = this.stringBuffer.substr(0, this.cursorPosition) +
-											e.key.toUpperCase() +
-											this.stringBuffer.substr(this.cursorPosition + 1);
-
+	this.bitOverride(this.cursorPosition, e.key.toUpperCase());
 	this.setCursorPosition(this.cursorPosition + 1);
 	this.render();
 
 };
-
 
 hexEditor.prototype.processNavKey = function(e) {
 
@@ -49,6 +57,7 @@ hexEditor.prototype.processNavKey = function(e) {
 };
 
 hexEditor.prototype.routeKey = function(e) {
+	this.log('warn', e.key);
 
 	if ( this.keyBindings.inputKeys.indexOf(e.key.toUpperCase()) > -1 ) {
 		this.processInputKey(e);
@@ -57,6 +66,11 @@ hexEditor.prototype.routeKey = function(e) {
 
 	if ( this.keyBindings.navKeys.indexOf(e.which) > -1 ) {
 		this.processNavKey(e);
+		return;
+	}
+
+	if ( this.keyBindings.deleteKeys.indexOf(e.key.toLowerCase()) > -1 ) {
+		this.processDeleteKey(e);
 		return;
 	}
 
