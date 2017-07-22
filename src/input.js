@@ -15,9 +15,11 @@ hexEditor.prototype.processInputKey = function(e) {
 	if ( this.cursorPosition >= this.stringBuffer.length )
 		return;
 
+	this.stopCursorAnimation();
 	this.bitOverride(this.cursorPosition, e.key.toUpperCase());
 	this.setCursorPosition(this.cursorPosition + 1);
 	this.render();
+	this.reanimateCursor();
 
 };
 

@@ -92,32 +92,37 @@ hexEditor.prototype.preRender = function() {
 	//Determine location addr offset
 
 	//Determine characters per line
+	
+	//Set the minimum height for scroll.
+	this.els.editor.style.minHeight = this.styles.editorHeight + "px";
+
 
 };
 
 
 hexEditor.prototype.render = function() {
 
-	//Clear the current editor drawing.
-	this.els.editor.innerHTML = '';
+	const PAINT_OVERFLOW_LINES = 4;
 
-	//Set the minimum height for scroll.
-	this.els.editor.style.minHeight = this.styles.editorHeight + "px";
-
-	//Get scroll top.
-	var editorScrollTop = this.els.editorContainer.scrollTop;
-	var virtualScrollTop = editorScrollTop;
+		//Get scroll top.
+	var virtualScrollTop = this.els.editorContainer.scrollTop;
 	if ( virtualScrollTop < 0 )
 		virtualScrollTop = 0;
 
-	var firstVisibleLine = Math.floor(virtualScrollTop / this.styles.lineHeight) -5;
+	//Clear the current editor drawing.
+	while ( this.els.editor.firstChild ) {
+		this.els.editor.removeChild(this.els.editor.firstChild);
+	}
+
+	var firstVisibleLine = Math.floor(virtualScrollTop / this.styles.lineHeight)
+												 - PAINT_OVERFLOW_LINES;
 
 	var charPosition = firstVisibleLine * (this.styles.bytesPerLine * 2);
 	var y = (firstVisibleLine * this.styles.lineHeight);
 
 	var maxPosition = charPosition + ( this.styles.bytesPerLine *
 		this.styles.editorLinesVisible * 2) +
-		(this.styles.bytesPerLine * 10);
+		(this.styles.bytesPerLine * PAINT_OVERFLOW_LINES * 2);
 
 	if ( maxPosition > this.stringBuffer.length ) 
 		maxPosition = this.stringBuffer.length;
