@@ -21,21 +21,23 @@
 		<div class="hex-data-type">
 			<table>
 				<tbody>
-					<tr><th>byte</th><td>69</td></tr>
-					<tr><th>short</th><td>696e</td></tr>
-					<tr><th>int</th><td>696eff</td></tr>
-					<tr><th>long</th><td>696eff2c</td></tr>
+					<tr><th>8-bit</th><td id="hex-data-type-byte">000</td></tr>
+					<tr><th>16-bit</th><td id="hex-data-type-short">000000</td></tr>
+					<tr><th>32-bit</th><td id="hex-data-type-int">000000000000</td></tr>
+					<tr><th>64-bit</th><td id="hex-data-type-long">000000000000000000000000</td></tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
 
 	<script src="src/vendor/debounce.js"></script>
+	<script src="src/vendor/string.js"></script>
 	<script src="src/hexedit.js"></script>
 	<script src="src/render.js"></script>
 	<script src="src/cursor.js"></script>
 	<script src="src/io.js"></script>
 	<script src="src/input.js"></script>
+	<script src="src/data-type.js"></script>
 	<script src="src/debug.js"></script>
 	<script>
 		var he = new hexEditor({

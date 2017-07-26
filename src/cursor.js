@@ -1,7 +1,11 @@
 hexEditor.prototype.setCursorPosition = function(charPosition) {
+	if ( this.cursorPosition === charPosition ) return;
+
 	this.cursorPosition = charPosition;
+	this.bytePosition = Math.floor(charPosition / 2);
 	this.drawCursor(charPosition);
 	this.scrollEditorToPosition(charPosition);
+	this.updateDataTypes();
 };
 
 hexEditor.prototype.drawCursor = function(charPosition) {
@@ -18,7 +22,6 @@ hexEditor.prototype.scrollEditorToPosition = function(charPosition) {
 	var editorHeight = this.els.editorContainer.clientHeight;
 
 	var newScroll = pos.y - (editorHeight / 2) + (this.styles.lineHeight / 2);
-
 	this.els.editorContainer.scrollTop = newScroll;
 };
 

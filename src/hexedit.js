@@ -4,6 +4,7 @@ function hexEditor(config) {
 	this.rawBuffer;
 	this.stringBuffer = "00";
 	this.cursorPosition = 0;
+	this.bytePosition = 0;
 
 	this.config = {
 		debug: false
@@ -53,7 +54,13 @@ hexEditor.prototype.init = function(config) {
 		editorContainer: document.getElementById('hex-editor-container'),
 		cursor: document.getElementById('hex-cursor'),
 		searchHighlight: document.getElementById('hex-search-highlight'),
-		openFile: document.getElementById('hex-file-open-input')
+		openFile: document.getElementById('hex-file-open-input'),
+		dataTypes: {
+			byte: document.getElementById('hex-data-type-byte'),
+			short: document.getElementById('hex-data-type-short'),
+			int: document.getElementById('hex-data-type-int'),
+			long: document.getElementById('hex-data-type-long')
+		}
 	};
 
 	document.addEventListener('keydown', function(e) {
@@ -62,9 +69,9 @@ hexEditor.prototype.init = function(config) {
 	this.els.openFile.addEventListener('change', function(e){
 		he.openLocalFile(e, this);
 	});
-	this.els.editorContainer.addEventListener('scroll', function(e){
+	this.els.editorContainer.addEventListener('scroll', throttle(function(e){
 		he.render();
-	});
+	}, 25));
 	window.addEventListener('resize', function(e){
 		he.preRender();
 		he.render();
