@@ -1,9 +1,28 @@
 hexEditor.prototype.loadHexString = function(hexString) {
+
 	this.stringBuffer = hexString;
-	this.setCursorPosition(0);
 	this.preRender();
 	this.render();
+	this.setCursorPosition(0);
+
 };
+
+hexEditor.prototype.loadArrayBuffer = function(buffer) {
+
+	var data = new DataView(buffer);
+
+	this.buffer = data;
+	this.bufferSize = data.byteLength;
+	this.preRender();
+	this.render();
+	this.setCursorPosition(0);
+	
+	console.log(this.bufferSize + " bytes");
+	console.log(this.readBytesAsHex(0,2));
+
+};
+
+
 
 hexEditor.prototype.binaryStringToHex = function(buffer) {
 	return Array.prototype.map.call(
@@ -59,6 +78,7 @@ hexEditor.prototype.openLocalFile = function(e, file) {
 	// Closure to capture the file information.
 	reader.onload = (function(theFile) {
 		return function(e) {
+			he.loadArrayBuffer(e.target.result);
 			he.loadHexString(he.binaryStringToHex(e.target.result));
 		};
 	})(file);
@@ -83,3 +103,18 @@ hexEditor.prototype.bitOverride = function(charPosition, data) {
 
 };
 
+hexEditor.prototype.readBytesAsHex = function(offset, numberOfBytes) {
+	if ( typeof offset == 'undefined' ) offset = 0;
+	if ( typeof numberOfBytes == 'undefined' ) numberOfBytes = 1;
+
+	var result = "";
+	var i = 0;
+
+	while ( i < numberOfBytes ) {
+		result += this.buffer.getUint8(offset + i).toString(16);
+		i++;
+	}
+
+	return result;
+
+}

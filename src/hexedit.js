@@ -3,6 +3,8 @@ function hexEditor(config) {
 	var he = this;
 	this.rawBuffer;
 	this.stringBuffer = "00";
+	this.buffer = null;
+	this.bufferSize = 0;
 	this.cursorPosition = 0;
 	this.bytePosition = 0;
 
