@@ -166,14 +166,17 @@ hexEditor.prototype.render = function() {
 hexEditor.prototype.highlightRegion = function(charPositionStart, charPositionEnd) {
 
 	var posStart = this.calculatePosition(charPositionStart);
+  posStart.x -= (this.styles.charWidth / 2);
 	posStart.y -= (this.styles.linePaddingTop);
 
 	var posEnd = this.calculatePosition(charPositionEnd);
 	var width = Math.abs( posStart.x - posEnd.x );
+  var height = this.styles.lineHeight;
 
 	this.els.searchHighlight.style.left = posStart.x + 'px';
 	this.els.searchHighlight.style.top = posStart.y + 'px';
 	this.els.searchHighlight.style.width = width + 'px';
+	this.els.searchHighlight.style.height = height + 'px';
 
 };
 

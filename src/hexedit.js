@@ -71,9 +71,9 @@ hexEditor.prototype.init = function(config) {
 	this.els.openFile.addEventListener('change', function(e){
 		he.openLocalFile(e, this);
 	});
-	this.els.editorContainer.addEventListener('scroll', throttle(function(e){
+	this.els.editorContainer.addEventListener('scroll', function(e){
 		he.render();
-	}, 25));
+	});
 	window.addEventListener('resize', function(e){
 		he.preRender();
 		he.render();
