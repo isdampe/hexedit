@@ -114,12 +114,16 @@ hexEditor.prototype.readBytesAsHex = function(offset, numberOfBytes, addSpaces) 
 	while ( i < numberOfBytes ) {
     if ( (offset + i) > this.buffer.byteLength ) break;
     if ( offset + i < 0 ) break;
-		result += this.buffer.getUint8(offset + i).toString(16);
+
+    let lb = this.buffer.getUint8(offset + i).toString(16);
+    if ( lb.length < 2 ) lb = "0" + lb;
+		result += lb;
+
     if ( addSpaces ) result += " ";
 		i++;
 	}
 
-  if ( result.substr(-1, 1) === " " ) result = result.substr(0, result.length - 1);
+  //if ( result.substr(-1, 1) === " " ) result = result.substr(0, result.length - 1);
 
 	return result;
 
