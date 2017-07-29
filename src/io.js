@@ -103,17 +103,23 @@ hexEditor.prototype.bitOverride = function(charPosition, data) {
 
 };
 
-hexEditor.prototype.readBytesAsHex = function(offset, numberOfBytes) {
+hexEditor.prototype.readBytesAsHex = function(offset, numberOfBytes, addSpaces) {
 	if ( typeof offset == 'undefined' ) offset = 0;
 	if ( typeof numberOfBytes == 'undefined' ) numberOfBytes = 1;
+  if ( typeof addSpaces == 'undefined' ) addSpaces = true;
 
 	var result = "";
 	var i = 0;
 
 	while ( i < numberOfBytes ) {
+    if ( (offset + i) > this.buffer.byteLength ) break;
+    if ( offset + i < 0 ) break;
 		result += this.buffer.getUint8(offset + i).toString(16);
+    if ( addSpaces ) result += " ";
 		i++;
 	}
+
+  if ( result.substr(-1, 1) === " " ) result = result.substr(0, result.length - 1);
 
 	return result;
 

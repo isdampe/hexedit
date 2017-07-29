@@ -96,7 +96,6 @@ hexEditor.prototype.preRender = function() {
 	//Set the minimum height for scroll.
 	this.els.editor.style.minHeight = this.styles.editorHeight + "px";
 
-
 };
 
 
@@ -116,19 +115,21 @@ hexEditor.prototype.render = function() {
 
 	var firstVisibleLine = Math.floor(virtualScrollTop / this.styles.lineHeight)
 												 - PAINT_OVERFLOW_LINES;
+  if ( firstVisibleLine < 0 ) firstVisibleLine = 0;
 
 	var charPosition = firstVisibleLine * (this.styles.bytesPerLine * 2);
+  if ( charPosition < 0 ) charPosition = 0;
+
 	var y = (firstVisibleLine * this.styles.lineHeight);
 
 	var maxPosition = charPosition + ( this.styles.bytesPerLine *
 		this.styles.editorLinesVisible * 2) +
 		(this.styles.bytesPerLine * PAINT_OVERFLOW_LINES * 2);
 
-	if ( maxPosition > this.stringBuffer.length ) 
-		maxPosition = this.stringBuffer.length;
+	if ( maxPosition > this.buffer.byteLength ) 
+		maxPosition = this.buffer.byteLength;
 
 	while ( charPosition < maxPosition ) {
-
 		let line = document.createElement('div');
 		line.className = 'line';
 		line.style.position = "absolute";
@@ -137,24 +138,10 @@ hexEditor.prototype.render = function() {
 		let data = document.createElement('div');
 		data.className = "data";
 
-		let lb = "";
-
-		//let location = document.createElement('div');
-		//location.className = 'location';
-		//location.innerText = "00";
-		for ( var x=0; x<this.styles.bytesPerLine; x++ ) {
-
-			let byte = this.stringBuffer.substr(charPosition, 2);
-			if ( byte.length == 2 ) {
-				lb += this.stringBuffer.substr(charPosition, 2) + " ";
-			}
-
-			//line.appendChild(location);
-			charPosition += 2;
-
-		}
-
+		let lb = this.readBytesAsHex(charPosition, this.styles.bytesPerLine) + " ";
+    charPosition += this.styles.bytesPerLine;
 		data.innerText = lb;
+
 		line.appendChild(data);
 		this.els.editor.appendChild(line);
 		y += this.styles.lineHeight;
